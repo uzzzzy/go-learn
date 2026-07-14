@@ -15,10 +15,11 @@ type Task struct {
 }
 
 type CreateTaskRequest struct {
-	Title string
+	Title string `json:"title" binding:"required"`
 }
 
 type UpdateTaskRequest struct {
-	Title     string
-	Completed bool
+	Title     string `json:"title" binding:"required"`
+	Completed bool   `json:"completed"`
 }
+
