@@ -9,6 +9,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"api/internal/common"
+	"api/internal/task"
 )
 
 func TestTaskWorkflow(t *testing.T) {
@@ -27,7 +30,7 @@ func TestTaskWorkflow(t *testing.T) {
 
 		assert.Equal(t, http.StatusCreated, w.Code)
 
-		var response ApiResponse[Task]
+		var response common.ApiResponse[task.Task]
 
 		err := json.Unmarshal(w.Body.Bytes(), &response)
 		assert.Nil(t, err)
@@ -46,7 +49,7 @@ func TestTaskWorkflow(t *testing.T) {
 
 		assert.Equal(t, http.StatusOK, r.Code)
 
-		var response ApiResponse[[]Task]
+		var response common.ApiResponse[[]task.Task]
 
 		err := json.Unmarshal(r.Body.Bytes(), &response)
 		assert.Nil(t, err)
@@ -66,7 +69,7 @@ func TestTaskWorkflow(t *testing.T) {
 
 		assert.Equal(t, http.StatusOK, w.Code)
 
-		var response ApiResponse[Task]
+		var response common.ApiResponse[task.Task]
 
 		err := json.Unmarshal(w.Body.Bytes(), &response)
 

@@ -4,29 +4,19 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	"api/internal/common"
+	"api/internal/task"
 )
-
-type ApiStatus string
-
-const (
-	StatusSuccess ApiStatus = "success"
-	StatusFailed  ApiStatus = "failed"
-)
-
-type ApiResponse[T any] struct {
-	Status ApiStatus `json:"status"`
-	Data   T         `json:"data,omitempty"`
-	Error  string    `json:"error,omitempty"`
-}
 
 func setupRouter() *gin.Engine {
 	router := gin.Default()
 
 	router.GET("/health", health)
 
-	router.GET("/tasks", GetTasks)
-	router.GET("/tasks/:id", GetTask)
-	router.POST("/tasks", CreateTasks)
+	router.GET("/tasks", task.GetTasks)
+	router.GET("/tasks/:id", task.GetTask)
+	router.POST("/tasks", task.CreateTasks)
 
 	return router
 }
@@ -38,7 +28,7 @@ func main() {
 }
 
 func health(c *gin.Context) {
-	response := ApiResponse[any]{
+	response := common.ApiResponse[any]{
 		Status: "ok",
 	}
 
