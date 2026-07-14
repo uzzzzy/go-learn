@@ -13,13 +13,13 @@ const (
 	StatusFailed  ApiStatus = "failed"
 )
 
-type ApiResponse struct {
+type ApiResponse[T any] struct {
 	Status ApiStatus `json:"status"`
-	Data   any       `json:"data,omitempty"`
+	Data   T         `json:"data,omitempty"`
 	Error  string    `json:"error,omitempty"`
 }
 
-func main() {
+func setupRouter() *gin.Engine {
 	router := gin.Default()
 
 	router.GET("/health", health)
@@ -27,11 +27,17 @@ func main() {
 	router.GET("/tasks", GetTasks)
 	router.POST("/tasks", CreateTasks)
 
+	return router
+}
+
+func main() {
+	router := setupRouter()
+
 	router.Run()
 }
 
 func health(c *gin.Context) {
-	response := ApiResponse{
+	response := ApiResponse[any]{
 		Status: "ok",
 	}
 
