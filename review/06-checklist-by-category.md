@@ -4,7 +4,7 @@ Diurutkan **prioritas** (P0 Blocker → P1 Penting → P2 Kualitas → P3 Skala/
 
 Catatan: beberapa item lintas-kategori (mis. data race) muncul di satu kategori "rumah" utamanya agar tidak dobel. Kode temuan sumber dicantumkan di tiap item.
 
-Progress total: `0 / 41`
+Progress total: `3 / 41`
 
 ---
 
@@ -57,8 +57,8 @@ Progress total: `0 / 41`
 ## ⚙️ Konkurensi & Korektness
 
 **P0**
-- [ ] Tambah `sync.RWMutex` ke `TaskRepository` (read/write lock sesuai method). `internal/task/repository.go:9-70`. *(C1)*
-- [ ] `GetAll` kembalikan salinan (`make`+`copy`), jangan bocorkan backing array. `internal/task/repository.go:33-35`. *(C-H1)*
+- [x] Tambah `sync.RWMutex` ke `TaskRepository` (read/write lock sesuai method). `internal/task/repository.go:9-70`. *(C1)*
+- [x] `GetAll` kembalikan salinan (`make`+`copy`), jangan bocorkan backing array. `internal/task/repository.go:33-35`. *(C-H1)*
 - [ ] `DeleteById` pakai `slices.Delete` di bawah write-lock. `internal/task/repository.go:64`. *(C-H2)*
 
 **P3**

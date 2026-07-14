@@ -34,7 +34,7 @@ Isu yang dikonfirmasi oleh lebih dari satu agent — prioritas tertinggi:
 ## Rekomendasi Prioritas (gabungan)
 
 **P0 — sebelum apa pun dianggap produksi**
-- [ ] Tambah `sync.RWMutex` ke `TaskRepository`.
+- [x] Tambah `sync.RWMutex` ke `TaskRepository`.
 - [x] Batasi ukuran body (`MaxBytesReader`) di route tulis.
 - [ ] Tambah `binding:"max=..."` pada `Title`.
 - [ ] Hentikan pengembalian `err.Error()` mentah ke klien.
