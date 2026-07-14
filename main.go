@@ -16,6 +16,7 @@ const (
 type ApiResponse struct {
 	Status ApiStatus `json:"status"`
 	Data   any       `json:"data,omitempty"`
+	Error  string    `json:"error,omitempty"`
 }
 
 func main() {
@@ -24,6 +25,7 @@ func main() {
 	router.GET("/health", health)
 
 	router.GET("/tasks", GetTasks)
+	router.POST("/tasks", CreateTasks)
 
 	router.Run()
 }
