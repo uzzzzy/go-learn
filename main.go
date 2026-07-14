@@ -25,6 +25,7 @@ func setupRouter() *gin.Engine {
 	router.GET("/health", health)
 
 	router.GET("/tasks", GetTasks)
+	router.GET("/tasks/:id", GetTask)
 	router.POST("/tasks", CreateTasks)
 
 	return router

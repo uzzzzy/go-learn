@@ -60,7 +60,7 @@ func TestTaskWorkflow(t *testing.T) {
 
 		url := fmt.Sprintf("/tasks/%d", createdTaskID)
 
-		req, _ := http.NewRequest("Get", url, nil)
+		req, _ := http.NewRequest("GET", url, nil)
 
 		router.ServeHTTP(w, req)
 
