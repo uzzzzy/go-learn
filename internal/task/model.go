@@ -1,5 +1,13 @@
 package task
 
+type TaskHandler struct {
+	service *TaskService
+}
+
+type TaskService struct {
+	repo *TaskRepository
+}
+
 type Task struct {
 	Id        int    `json:"id"`
 	Title     string `json:"title"`

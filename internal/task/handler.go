@@ -9,20 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type TaskHandler struct {
-	repo *TaskRepository
-}
-
-func (repo *TaskRepository) GetTasks(c *gin.Context) {
-	list := repo.GetAll()
+func (h *TaskHandler) GetTasks(c *gin.Context) {
+	tasks := h.service.GetAllTasks()
 
 	c.JSON(http.StatusOK, common.ApiResponse[[]Task]{
 		Status: common.StatusSuccess,
-		Data:   list,
+		Data:   tasks,
 	})
 }
 
-func (repo *TaskRepository) CreateTasks(c *gin.Context) {
+func (h *TaskHandler) CreateTask(c *gin.Context) {
 	var input CreateTaskRequest
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -33,7 +29,7 @@ func (repo *TaskRepository) CreateTasks(c *gin.Context) {
 		return
 	}
 
-	task := repo.Create(input)
+	task := h.service.CreateTask(input)
 
 	c.JSON(http.StatusCreated, common.ApiResponse[Task]{
 		Status: common.StatusSuccess,
@@ -41,7 +37,7 @@ func (repo *TaskRepository) CreateTasks(c *gin.Context) {
 	})
 }
 
-func (repo *TaskRepository) GetTask(c *gin.Context) {
+func (h *TaskHandler) GetTask(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -52,7 +48,8 @@ func (repo *TaskRepository) GetTask(c *gin.Context) {
 		return
 	}
 
-	task, err := repo.GetById(id)
+	task, err := h.service.GetById(id)
+
 	if err != nil {
 		c.JSON(http.StatusNotFound, common.ApiResponse[any]{
 			Status: common.StatusFailed,

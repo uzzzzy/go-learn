@@ -12,11 +12,12 @@ import (
 func setupRouter() *gin.Engine {
 	router := gin.Default()
 
+	apiGroup := router.Group("/api/v1")
+
+	taskRepo := task.NewTaskRepository()
+	task.RegisterRouters(apiGroup, taskRepo)
+
 	router.GET("/health", health)
-
-	repo := task.NewTaskRepository()
-
-	task.RegisterRouters(&router.RouterGroup, repo)
 
 	return router
 }
