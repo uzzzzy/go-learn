@@ -36,9 +36,9 @@ Isu yang dikonfirmasi oleh lebih dari satu agent — prioritas tertinggi:
 **P0 — sebelum apa pun dianggap produksi**
 - [x] Tambah `sync.RWMutex` ke `TaskRepository`.
 - [x] Batasi ukuran body (`MaxBytesReader`) di route tulis.
-- [ ] Tambah `binding:"max=..."` pada `Title`.
+- [x] Tambah `binding:"max=..."` pada `Title`.
 - [ ] Hentikan pengembalian `err.Error()` mentah ke klien.
-- [ ] Tambah server timeouts (ganti `router.Run()` dengan `http.Server` terkonfigurasi).
+- [x] Tambah server timeouts (ganti `router.Run()` dengan `http.Server` terkonfigurasi).
 
 **P1 — kelengkapan & konsistensi**
 - [ ] Ekspos PUT/PATCH/DELETE atau hapus method repo yang tak terpakai (putuskan salah satu).

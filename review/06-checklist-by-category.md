@@ -33,7 +33,7 @@ Progress total: `3 / 41`
 
 **P0**
 - [x] Batasi ukuran request body dengan `http.MaxBytesReader` di route tulis. `internal/middleware/request.go`, dipasang di `POST /tasks` (`internal/task/router.go:17`); handler balas `413` via `isBodyTooLarge` (`internal/task/handler.go:39`). *(S-C2)*
-- [ ] Tambah `max=` pada `Title` (`binding:"required,max=256"`). `internal/task/model.go:32-39`. *(S-C2)*
+- [x] Tambah `max=` pada `Title` (`binding:"required,max=256"`). `internal/task/model.go:32-39`. *(S-C2)*
 - [ ] Ganti `router.Run()` dengan `http.Server` bertimeout (anti-Slowloris). `main.go:28`. *(S-H1)*
 - [ ] Bind ke `127.0.0.1` (configurable), bukan `0.0.0.0`. `main.go:28`. *(S-H4)*
 - [ ] Berhenti kembalikan `err.Error()` mentah ke klien; log di server, balas generik. `internal/task/handler.go:25-31, 62-68`. *(S-M1)*

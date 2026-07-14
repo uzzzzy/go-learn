@@ -1,7 +1,9 @@
 package main
 
 import (
+	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 
@@ -25,7 +27,20 @@ func setupRouter() *gin.Engine {
 func main() {
 	router := setupRouter()
 
-	router.Run()
+	srv := &http.Server{
+		Addr:    ":8080",
+		Handler: router,
+
+		ReadTimeout:    5 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		IdleTimeout:    15 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	log.Println("Server running on port :8080...")
+	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		log.Fatalf("Serve error: %s\n", err)
+	}
 }
 
 func health(c *gin.Context) {

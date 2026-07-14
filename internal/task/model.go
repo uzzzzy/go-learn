@@ -25,7 +25,7 @@ type Task struct {
 }
 
 type CreateTaskRequest struct {
-	Title string `json:"title" binding:"required"`
+	Title string `json:"title" binding:"required,max=256"`
 }
 
 type UpdateTaskRequest struct {
