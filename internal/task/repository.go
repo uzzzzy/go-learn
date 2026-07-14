@@ -48,7 +48,7 @@ func (r *TaskRepository) UpdateById(id int, payload UpdateTaskRequest) (Task, er
 			r.tasks[i].Title = payload.Title
 			r.tasks[i].Completed = payload.Completed
 
-			return task, nil
+			return r.tasks[i], nil
 		}
 	}
 
@@ -58,8 +58,9 @@ func (r *TaskRepository) UpdateById(id int, payload UpdateTaskRequest) (Task, er
 func (r *TaskRepository) DeleteById(id int) (Task, error) {
 	for i, task := range r.tasks {
 		if task.Id == id {
+			deletedTask := task
 			r.tasks = append(r.tasks[:i], r.tasks[i+1:]...)
-			return r.tasks[i], nil
+			return deletedTask, nil
 		}
 	}
 

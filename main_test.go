@@ -23,7 +23,7 @@ func TestTaskWorkflow(t *testing.T) {
 		w := httptest.NewRecorder()
 		jsonBody := []byte(`{"title": "Belajar Integration Testing"}`)
 
-		req, _ := http.NewRequest("POST", "/tasks", bytes.NewBuffer(jsonBody))
+		req, _ := http.NewRequest("POST", "/api/v1/tasks", bytes.NewBuffer(jsonBody))
 		req.Header.Set("Content-Type", "application/json")
 
 		router.ServeHTTP(w, req)
@@ -42,7 +42,7 @@ func TestTaskWorkflow(t *testing.T) {
 	t.Run("Get All Task", func(t *testing.T) {
 		r := httptest.NewRecorder()
 
-		req, _ := http.NewRequest("GET", "/tasks", nil)
+		req, _ := http.NewRequest("GET", "/api/v1/tasks", nil)
 		req.Header.Set("Content-Type", "application/json")
 
 		router.ServeHTTP(r, req)
@@ -61,7 +61,7 @@ func TestTaskWorkflow(t *testing.T) {
 	t.Run("Get By Id", func(t *testing.T) {
 		w := httptest.NewRecorder()
 
-		url := fmt.Sprintf("/tasks/%d", createdTaskID)
+		url := fmt.Sprintf("/api/v1/tasks/%d", createdTaskID)
 
 		req, _ := http.NewRequest("GET", url, nil)
 

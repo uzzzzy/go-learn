@@ -18,10 +18,6 @@ func (s *TaskService) GetById(id int) (Task, error) {
 }
 
 func (s *TaskService) CreateTask(input CreateTaskRequest) Task {
-	newTask := s.repo.Create(input)
-
-	s.repo.tasks = append(s.repo.tasks, newTask)
-	s.repo.nextID++
-
-	return newTask
+	return s.repo.Create(input)
 }
+
