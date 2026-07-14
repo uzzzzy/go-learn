@@ -4,6 +4,8 @@ import (
 	"errors"
 )
 
+var ErrTaskNotFound = errors.New("task not found")
+
 type TaskRepository struct {
 	tasks  []Task
 	nextID int
@@ -39,7 +41,7 @@ func (r *TaskRepository) GetById(id int) (Task, error) {
 		}
 	}
 
-	return Task{}, errors.New("Task Not Found")
+	return Task{}, ErrTaskNotFound
 }
 
 func (r *TaskRepository) UpdateById(id int, payload UpdateTaskRequest) (Task, error) {
@@ -52,7 +54,7 @@ func (r *TaskRepository) UpdateById(id int, payload UpdateTaskRequest) (Task, er
 		}
 	}
 
-	return Task{}, errors.New("Task Not Found")
+	return Task{}, ErrTaskNotFound
 }
 
 func (r *TaskRepository) DeleteById(id int) (Task, error) {
@@ -64,5 +66,5 @@ func (r *TaskRepository) DeleteById(id int) (Task, error) {
 		}
 	}
 
-	return Task{}, errors.New("Task Not Found")
+	return Task{}, ErrTaskNotFound
 }

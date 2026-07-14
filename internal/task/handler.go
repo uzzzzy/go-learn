@@ -1,6 +1,7 @@
 package task
 
 import (
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -50,8 +51,16 @@ func (h *TaskHandler) GetTask(c *gin.Context) {
 
 	task, err := h.service.GetById(id)
 
-	if err != nil {
+	if errors.Is(err, ErrTaskNotFound) {
 		c.JSON(http.StatusNotFound, common.ApiResponse[any]{
+			Status: common.StatusFailed,
+			Error:  err.Error(),
+		})
+		return
+	}
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, common.ApiResponse[any]{
 			Status: common.StatusFailed,
 			Error:  err.Error(),
 		})
