@@ -72,3 +72,7 @@ func (h *TaskHandler) GetTask(c *gin.Context) {
 		Data:   task,
 	})
 }
+
+func NewTaskHandler(s Service) *TaskHandler {
+	return &TaskHandler{service: s}
+}

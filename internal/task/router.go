@@ -2,9 +2,9 @@ package task
 
 import "github.com/gin-gonic/gin"
 
-func RegisterRouters(rg *gin.RouterGroup, repo *TaskRepository) {
+func RegisterRouters(rg *gin.RouterGroup, repo Repository) {
 	service := NewTaskService(repo)
-	handler := &TaskHandler{service: service}
+	handler := NewTaskHandler(service)
 
 	group := rg.Group("/tasks")
 	{

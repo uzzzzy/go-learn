@@ -1,6 +1,6 @@
 package task
 
-func NewTaskService(r *TaskRepository) *TaskService {
+func NewTaskService(r Repository) *TaskService {
 	return &TaskService{repo: r}
 }
 
