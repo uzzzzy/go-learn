@@ -22,7 +22,7 @@ func main() {
 func health(c *gin.Context) {
 	response := ApiResponse{
 		Status:  "success",
-		Message: "Api Healthy",
+		Message: "api is healthy",
 	}
 
 	c.JSON(http.StatusOK, response)
