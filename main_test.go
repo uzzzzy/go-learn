@@ -10,7 +10,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"api/internal/common"
+	"api/internal/response"
 	"api/internal/task"
 )
 
@@ -30,13 +30,13 @@ func TestTaskWorkflow(t *testing.T) {
 
 		assert.Equal(t, http.StatusCreated, w.Code)
 
-		var response common.ApiResponse[task.Task]
+		var resp response.ApiResponse[task.Task]
 
-		err := json.Unmarshal(w.Body.Bytes(), &response)
+		err := json.Unmarshal(w.Body.Bytes(), &resp)
 		assert.Nil(t, err)
-		assert.NotEmpty(t, response.Data.Id)
+		assert.NotEmpty(t, resp.Data.Id)
 
-		createdTaskID = response.Data.Id
+		createdTaskID = resp.Data.Id
 	})
 
 	t.Run("Get All Task", func(t *testing.T) {
@@ -49,13 +49,13 @@ func TestTaskWorkflow(t *testing.T) {
 
 		assert.Equal(t, http.StatusOK, r.Code)
 
-		var response common.ApiResponse[[]task.Task]
+		var resp response.ApiResponse[[]task.Task]
 
-		err := json.Unmarshal(r.Body.Bytes(), &response)
+		err := json.Unmarshal(r.Body.Bytes(), &resp)
 		assert.Nil(t, err)
-		assert.NotEmpty(t, response.Data)
+		assert.NotEmpty(t, resp.Data)
 
-		assert.Equal(t, 1, len(response.Data))
+		assert.Equal(t, 1, len(resp.Data))
 	})
 
 	t.Run("Get By Id", func(t *testing.T) {
@@ -69,12 +69,12 @@ func TestTaskWorkflow(t *testing.T) {
 
 		assert.Equal(t, http.StatusOK, w.Code)
 
-		var response common.ApiResponse[task.Task]
+		var resp response.ApiResponse[task.Task]
 
-		err := json.Unmarshal(w.Body.Bytes(), &response)
+		err := json.Unmarshal(w.Body.Bytes(), &resp)
 
 		assert.Nil(t, err)
-		assert.Equal(t, createdTaskID, response.Data.Id)
+		assert.Equal(t, createdTaskID, resp.Data.Id)
 	})
 
 	_ = createdTaskID

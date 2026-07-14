@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"api/internal/common"
+	"api/internal/response"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,8 +13,8 @@ import (
 func (h *TaskHandler) GetTasks(c *gin.Context) {
 	tasks := h.service.GetAllTasks()
 
-	c.JSON(http.StatusOK, common.ApiResponse[[]Task]{
-		Status: common.StatusSuccess,
+	c.JSON(http.StatusOK, response.ApiResponse[[]Task]{
+		Status: response.StatusSuccess,
 		Data:   tasks,
 	})
 }
@@ -23,8 +23,8 @@ func (h *TaskHandler) CreateTask(c *gin.Context) {
 	var input CreateTaskRequest
 
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, common.ApiResponse[any]{
-			Status: common.StatusFailed,
+		c.JSON(http.StatusBadRequest, response.ApiResponse[any]{
+			Status: response.StatusFailed,
 			Error:  err.Error(),
 		})
 		return
@@ -32,8 +32,8 @@ func (h *TaskHandler) CreateTask(c *gin.Context) {
 
 	task := h.service.CreateTask(input)
 
-	c.JSON(http.StatusCreated, common.ApiResponse[Task]{
-		Status: common.StatusSuccess,
+	c.JSON(http.StatusCreated, response.ApiResponse[Task]{
+		Status: response.StatusSuccess,
 		Data:   task,
 	})
 }
@@ -42,8 +42,8 @@ func (h *TaskHandler) GetTask(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, common.ApiResponse[any]{
-			Status: common.StatusFailed,
+		c.JSON(http.StatusBadRequest, response.ApiResponse[any]{
+			Status: response.StatusFailed,
 			Error:  "Invalid ID",
 		})
 		return
@@ -52,23 +52,23 @@ func (h *TaskHandler) GetTask(c *gin.Context) {
 	task, err := h.service.GetById(id)
 
 	if errors.Is(err, ErrTaskNotFound) {
-		c.JSON(http.StatusNotFound, common.ApiResponse[any]{
-			Status: common.StatusFailed,
+		c.JSON(http.StatusNotFound, response.ApiResponse[any]{
+			Status: response.StatusFailed,
 			Error:  err.Error(),
 		})
 		return
 	}
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, common.ApiResponse[any]{
-			Status: common.StatusFailed,
+		c.JSON(http.StatusInternalServerError, response.ApiResponse[any]{
+			Status: response.StatusFailed,
 			Error:  err.Error(),
 		})
 		return
 	}
 
-	c.JSON(http.StatusOK, common.ApiResponse[Task]{
-		Status: common.StatusSuccess,
+	c.JSON(http.StatusOK, response.ApiResponse[Task]{
+		Status: response.StatusSuccess,
 		Data:   task,
 	})
 }

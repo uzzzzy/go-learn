@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"api/internal/common"
+	"api/internal/response"
 	"api/internal/task"
 )
 
@@ -29,9 +29,9 @@ func main() {
 }
 
 func health(c *gin.Context) {
-	response := common.ApiResponse[any]{
+	resp := response.ApiResponse[any]{
 		Status: "ok",
 	}
 
-	c.JSON(http.StatusOK, response)
+	c.JSON(http.StatusOK, resp)
 }
