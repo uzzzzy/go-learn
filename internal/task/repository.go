@@ -48,7 +48,7 @@ func (r *TaskRepository) UpdateById(id int, payload UpdateTaskRequest) (Task, er
 			r.tasks[i].Title = payload.Title
 			r.tasks[i].Completed = payload.Completed
 
-			return r.tasks[i], nil
+			return task, nil
 		}
 	}
 

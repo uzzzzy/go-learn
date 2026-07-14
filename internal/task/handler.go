@@ -9,10 +9,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var repository = NewTaskRepository()
+type TaskHandler struct {
+	repo *TaskRepository
+}
 
-func GetTasks(c *gin.Context) {
-	list := repository.GetAll()
+func (repo *TaskRepository) GetTasks(c *gin.Context) {
+	list := repo.GetAll()
 
 	c.JSON(http.StatusOK, common.ApiResponse[[]Task]{
 		Status: common.StatusSuccess,
@@ -20,7 +22,7 @@ func GetTasks(c *gin.Context) {
 	})
 }
 
-func CreateTasks(c *gin.Context) {
+func (repo *TaskRepository) CreateTasks(c *gin.Context) {
 	var input CreateTaskRequest
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -31,7 +33,7 @@ func CreateTasks(c *gin.Context) {
 		return
 	}
 
-	task := repository.Create(input)
+	task := repo.Create(input)
 
 	c.JSON(http.StatusCreated, common.ApiResponse[Task]{
 		Status: common.StatusSuccess,
@@ -39,7 +41,7 @@ func CreateTasks(c *gin.Context) {
 	})
 }
 
-func GetTask(c *gin.Context) {
+func (repo *TaskRepository) GetTask(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -50,7 +52,7 @@ func GetTask(c *gin.Context) {
 		return
 	}
 
-	task, err := repository.GetById(id)
+	task, err := repo.GetById(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, common.ApiResponse[any]{
 			Status: common.StatusFailed,
