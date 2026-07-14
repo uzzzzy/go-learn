@@ -7,8 +7,7 @@ import (
 )
 
 type ApiResponse struct {
-	Status  string `json:"status"`
-	Message string `json:"message"`
+	Status string `json:"status"`
 }
 
 func main() {
@@ -21,8 +20,7 @@ func main() {
 
 func health(c *gin.Context) {
 	response := ApiResponse{
-		Status:  "success",
-		Message: "api is healthy",
+		Status: "ok",
 	}
 
 	c.JSON(http.StatusOK, response)
