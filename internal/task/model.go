@@ -14,14 +14,9 @@ type Service interface {
 	CreateTask(input CreateTaskRequest) Task
 }
 
-type TaskHandler struct {
-	service Service
-}
-
 type TaskService struct {
 	repo Repository
 }
-
 
 type Task struct {
 	Id        int    `json:"id"`
@@ -37,4 +32,3 @@ type UpdateTaskRequest struct {
 	Title     string `json:"title" binding:"required"`
 	Completed bool   `json:"completed"`
 }
-

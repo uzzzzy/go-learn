@@ -35,7 +35,8 @@ Isu yang dikonfirmasi oleh lebih dari satu agent — prioritas tertinggi:
 
 **P0 — sebelum apa pun dianggap produksi**
 - [ ] Tambah `sync.RWMutex` ke `TaskRepository`.
-- [ ] Batasi ukuran body (`MaxBytesReader`) + `binding:"max=..."` pada `Title`.
+- [x] Batasi ukuran body (`MaxBytesReader`) di route tulis.
+- [ ] Tambah `binding:"max=..."` pada `Title`.
 - [ ] Hentikan pengembalian `err.Error()` mentah ke klien.
 - [ ] Tambah server timeouts (ganti `router.Run()` dengan `http.Server` terkonfigurasi).
 

@@ -1,6 +1,10 @@
 package task
 
-import "github.com/gin-gonic/gin"
+import (
+	"api/internal/middleware"
+
+	"github.com/gin-gonic/gin"
+)
 
 func RegisterRouters(rg *gin.RouterGroup, repo Repository) {
 	service := NewTaskService(repo)
@@ -10,6 +14,6 @@ func RegisterRouters(rg *gin.RouterGroup, repo Repository) {
 	{
 		group.GET("", handler.GetTasks)
 		group.GET("/:id", handler.GetTask)
-		group.POST("", handler.CreateTask)
+		group.POST("", middleware.MaxBodySize(1024*1024), handler.CreateTask)
 	}
 }

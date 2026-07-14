@@ -10,6 +10,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func isBodyTooLarge(err error) bool {
+	var maxBytesErr *http.MaxBytesError
+	return errors.As(err, &maxBytesErr)
+}
+
+type TaskHandler struct {
+	service Service
+}
+
+func NewTaskHandler(s Service) *TaskHandler {
+	return &TaskHandler{service: s}
+}
+
 func (h *TaskHandler) GetTasks(c *gin.Context) {
 	tasks := h.service.GetAllTasks()
 
@@ -23,6 +36,14 @@ func (h *TaskHandler) CreateTask(c *gin.Context) {
 	var input CreateTaskRequest
 
 	if err := c.ShouldBindJSON(&input); err != nil {
+		if isBodyTooLarge(err) {
+			c.JSON(http.StatusRequestEntityTooLarge, response.ApiResponse[any]{
+				Status: response.StatusFailed,
+				Error:  err.Error(),
+			})
+			return
+		}
+
 		c.JSON(http.StatusBadRequest, response.ApiResponse[any]{
 			Status: response.StatusFailed,
 			Error:  err.Error(),
@@ -71,8 +92,4 @@ func (h *TaskHandler) GetTask(c *gin.Context) {
 		Status: response.StatusSuccess,
 		Data:   task,
 	})
-}
-
-func NewTaskHandler(s Service) *TaskHandler {
-	return &TaskHandler{service: s}
 }
