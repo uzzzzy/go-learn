@@ -48,7 +48,7 @@ Isu yang dikonfirmasi oleh lebih dari satu agent — prioritas tertinggi:
 
 **P2 — kualitas & kesiapan skala**
 - [ ] Propagasi `context.Context` ke Service/Repository.
-- [ ] Pecah `model.go` → `model.go` / `dto.go` / `interfaces.go`; perbaiki stutter penamaan.
+- [x] Pecah `model.go` → `model.go` / `dto.go` / `interfaces.go` (sebagian, stutter penamaan belum).
 - [ ] `gofmt -w .`, integrasikan `golangci-lint` di CI.
 - [ ] Graceful shutdown + config layer (port/timeouts dari env).
 

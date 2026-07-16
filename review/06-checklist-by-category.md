@@ -4,7 +4,7 @@ Diurutkan **prioritas** (P0 Blocker → P1 Penting → P2 Kualitas → P3 Skala/
 
 Catatan: beberapa item lintas-kategori (mis. data race) muncul di satu kategori "rumah" utamanya agar tidak dobel. Kode temuan sumber dicantumkan di tiap item.
 
-Progress total: `3 / 41`
+Progress total: `7 / 41`
 
 ---
 
@@ -18,7 +18,7 @@ Progress total: `3 / 41`
 
 **P2**
 - [ ] Konsolidasi composition root: bangun repo→service→handler di satu tempat; `RegisterRouters` hanya map route. `main.go:17-18`, `internal/task/router.go:5-8`. *(A-M2)*
-- [ ] Pecah `model.go` → `model.go` (entity) / `dto.go` / interface didekatkan ke consumer. *(A-M3)*
+- [x] Pecah `model.go` → `model.go` (entity) / `dto.go` / interface didekatkan ke consumer. *(A-M3)*
 
 **P3**
 - [ ] Propagasi `context.Context` di method Service/Repository. *(A-H2)*
@@ -34,7 +34,7 @@ Progress total: `3 / 41`
 **P0**
 - [x] Batasi ukuran request body dengan `http.MaxBytesReader` di route tulis. `internal/middleware/request.go`, dipasang di `POST /tasks` (`internal/task/router.go:17`); handler balas `413` via `isBodyTooLarge` (`internal/task/handler.go:39`). *(S-C2)*
 - [x] Tambah `max=` pada `Title` (`binding:"required,max=256"`). `internal/task/model.go:32-39`. *(S-C2)*
-- [ ] Ganti `router.Run()` dengan `http.Server` bertimeout (anti-Slowloris). `main.go:28`. *(S-H1)*
+- [x] Ganti `router.Run()` dengan `http.Server` bertimeout (anti-Slowloris). `main.go:28`. *(S-H1)*
 - [ ] Bind ke `127.0.0.1` (configurable), bukan `0.0.0.0`. `main.go:28`. *(S-H4)*
 - [ ] Berhenti kembalikan `err.Error()` mentah ke klien; log di server, balas generik. `internal/task/handler.go:25-31, 62-68`. *(S-M1)*
 
@@ -70,7 +70,7 @@ Progress total: `3 / 41`
 ## 🧹 Kualitas Kode & Idiom Go
 
 **P1**
-- [ ] `gofmt -w internal/task/model.go internal/task/service.go` (dua file gagal format). *(Q-H1)*
+- [x] `gofmt -w internal/task/model.go internal/task/service.go` (dua file gagal format). *(Q-H1)*
 
 **P2**
 - [ ] Hilangkan stutter penamaan: `TaskRepository`→`Repository`, dst; `NewTaskX`→`NewX`. `internal/task/*`, `main.go:17-18`. *(Q-M1)*
