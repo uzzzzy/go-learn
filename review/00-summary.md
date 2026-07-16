@@ -41,10 +41,10 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [x] Format kode yang tidak rapi (`model.go` & `service.go`) menggunakan `gofmt`. *(Q-H1)*
 - [x] `go mod tidy` — `mongo-driver/v2` tetap ada karena di-import secara indirect oleh `gin`. *(A-L1)*
 - [x] Format kode (`gofmt -w .`) dan jalankan linter (`golangci-lint`) secara menyeluruh. *(Q-tooling)*
-- [ ] Hilangkan stutter penamaan: `TaskRepository`→`Repository`, `NewTaskRepository`→`NewRepository` pada package `task`. *(Q-M1)*
-- [ ] Ubah nama `RegisterRouters` → `RegisterRoutes` di `router.go`. *(Q-L2)*
+- [i] Hilangkan stutter penamaan: `TaskRepository`→`Repository`, `NewTaskRepository`→`NewRepository` pada package `task`. *(Q-M1)*
+- [x] Ubah nama `RegisterRouters` → `RegisterRoutes` di `router.go`. *(Q-L2)*
 - [ ] Perbaiki tag `omitempty` pada generic `Data T` (pakai `*T` atau hapus tag). *(Q-M3)*
-- [ ] Batasi bind server ke `127.0.0.1` (hanya lokal) saat development, bukan `0.0.0.0`. *(S-H4)*
+- [x] Batasi bind server ke `127.0.0.1` (hanya lokal) saat development, bukan `0.0.0.0`. *(S-H4)*
 
 ### Milestone 2 — HTTP Handler & Validasi API Go (Menengah)
 *Fokus pada penanganan request HTTP, error handling, dan response formatting.*

@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterRouters(rg *gin.RouterGroup, repo Repository) {
+func RegisterRoutes(rg *gin.RouterGroup, repo Repository) {
 	service := NewTaskService(repo)
 	handler := NewTaskHandler(service)
 

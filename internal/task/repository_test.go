@@ -10,7 +10,7 @@ import (
 // TestConcurrentCreate memastikan Create aman dipanggil banyak goroutine
 // sekaligus: jumlah task benar dan tidak ada ID duplikat / hilang.
 func TestConcurrentCreate(t *testing.T) {
-	repo := NewTaskRepository()
+	repo := NewRepository()
 
 	const goroutines = 100
 	t.Logf("menjalankan %d goroutine Create() bersamaan", goroutines)
@@ -46,7 +46,7 @@ func TestConcurrentCreate(t *testing.T) {
 // bersamaan. Tujuannya menyulut race detector (`go test -race`) jika ada
 // akses tak terlindungi ke state internal.
 func TestConcurrentReadWrite(t *testing.T) {
-	repo := NewTaskRepository()
+	repo := NewRepository()
 
 	// Seed data awal supaya operasi read/update/delete punya sasaran.
 	const seed = 50
@@ -109,7 +109,7 @@ func TestConcurrentReadWrite(t *testing.T) {
 // walau banyak goroutine berebut menghapus id yang sama, jumlah sukses harus
 // sama persis dengan jumlah task yang ada.
 func TestConcurrentDelete(t *testing.T) {
-	repo := NewTaskRepository()
+	repo := NewRepository()
 
 	const total = 100
 	for i := 0; i < total; i++ {

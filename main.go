@@ -16,8 +16,8 @@ func setupRouter() *gin.Engine {
 
 	apiGroup := router.Group("/api/v1")
 
-	taskRepo := task.NewTaskRepository()
-	task.RegisterRouters(apiGroup, taskRepo)
+	taskRepo := task.NewRepository()
+	task.RegisterRoutes(apiGroup, taskRepo)
 
 	router.GET("/health", health)
 
@@ -28,7 +28,7 @@ func main() {
 	router := setupRouter()
 
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    "127.0.0.1:8080",
 		Handler: router,
 
 		ReadTimeout:    5 * time.Second,

@@ -13,7 +13,7 @@ type TaskRepository struct {
 	nextID int
 }
 
-func NewTaskRepository() *TaskRepository {
+func NewRepository() *TaskRepository {
 	return &TaskRepository{
 		tasks:  []Task{},
 		nextID: 1,
