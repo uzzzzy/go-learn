@@ -45,6 +45,8 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [x] Ubah nama `RegisterRouters` → `RegisterRoutes` di `router.go`. *(Q-L2)*
 - [ ] Perbaiki tag `omitempty` pada generic `Data T` (pakai `*T` atau hapus tag). *(Q-M3)*
 - [x] Batasi bind server ke `127.0.0.1` (hanya lokal) saat development, bukan `0.0.0.0`. *(S-H4)*
+- [ ] *Learning Item:* Pelajari konvensi penamaan Go (Effective Go) dan mengapa Go menghindari pengulangan nama package di nama struct/fungsi (*stuttering*).
+- [ ] *Learning Item:* Pahami perbedaan cakupan akses *exported* (huruf besar) vs *unexported* (huruf kecil) di Go.
 
 ### Milestone 2 — HTTP Handler & Validasi API Go (Menengah)
 *Fokus pada penanganan request HTTP, error handling, dan response formatting.*
@@ -55,6 +57,8 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Tambah helper response (`OK`/`Success`/`Fail`) untuk merapikan handler & hapus duplikasi envelope. *(Q-L3)*
 - [ ] Tolak `id < 1` secara eksplisit di `GetTask` dan pastikan header `Content-Type: application/json`. *(S-L1, S-L3)*
 - [ ] Ubah health handler menggunakan konstanta `StatusSuccess` dibanding string `"ok"`. *(Q-L3)*
+- [ ] *Learning Item:* Pahami perbedaan cara kerja `c.ShouldBindJSON` (manual handle error) dengan `c.BindJSON` (otomatis merespons 400 dan abort request).
+- [ ] *Learning Item:* Pelajari bagaimana middleware Gin berantai menggunakan `c.Next()` dan `c.Abort()`.
 
 ### Milestone 3 — Unit Testing di Go (Korektness)
 *Fokus pada gaya pengujian Go yang idiomatik (table-driven test) dan isolation.*
@@ -63,6 +67,8 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Buat HTTP error-path test untuk router/handler (bad request, invalid JSON, missing fields, not found). *(T-High)*
 - [ ] Rapikan `main_test.go` agar subtest tidak order-dependent. *(T-Medium)*
 - [ ] Tambahkan unit test untuk `/health`. *(T-Medium)*
+- [ ] *Learning Item:* Eksperimen membagi testcase dengan subtest `t.Run()` agar laporan kegagalan pengujian lebih modular.
+- [ ] *Learning Item:* Jalankan `go test -coverprofile=coverage.out` dan visualisasikan baris kode yang belum teruji via browser dengan `go tool cover -html=coverage.out`.
 
 ### Milestone 4 — Struktur Data & Konkurensi Go (Lanjutan)
 *Fokus pada safety dan optimasi konkurensi di Go.*
@@ -72,6 +78,8 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Ubah penyimpanan repository dari slice `[]Task` menjadi `map[int]Task` untuk lookup O(1). *(C-recommended)*
 - [ ] Sederhanakan service layer jika method hanya berupa pass-through murni. *(C-L1)*
 - [ ] Buat concurrent `-race` test dengan goroutine konkuren, lalu jalankan `go test -race ./...`. *(T-Low / C)*
+- [ ] *Learning Item:* Pahami perbedaan `sync.Mutex` (eksklusif) dengan `sync.RWMutex` (multiple readers, single writer) dan kapan harus memilih salah satunya.
+- [ ] *Learning Item:* Pelajari bagaimana compiler Go mendeteksi data race (`-race`) dan cara membaca visualisasi report data race.
 
 ### Milestone 5 — Arsitektur & Hardening Sistem (Kesiapan Produksi)
 *Fokus pada penyusunan dependency injection, life-cycle server, dan manajemen request.*
@@ -82,6 +90,8 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Terapkan Graceful Shutdown menggunakan `signal.NotifyContext` + `srv.Shutdown(ctx)`. *(A-M5)*
 - [ ] Tambahkan paginasi (`limit` & `offset` query params) pada `GET /tasks`. *(S-H2)*
 - [ ] Tambahkan rate limiting middleware pada server API. *(S-H3)*
+- [ ] *Learning Item:* Pahami cara kerja pembatalan request (cancellation propagation) melalui `context.Context` yang diteruskan dari handler.
+- [ ] *Learning Item:* Pelajari siklus sinyal sistem operasi (`SIGINT`, `SIGTERM`) dan bagaimana server menyelesaikan request aktif sebelum mati total (*graceful*).
 
 ### Milestone 6 — Keamanan API & Produksi Lanjutan
 *Fokus pada pengerasan keamanan sistem web.*
@@ -91,5 +101,6 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Konfigurasi CORS secara eksplisit (jangan `*` dengan credentials). *(S-M4)*
 - [ ] Gunakan `gin.New()` + `gin.ReleaseMode` + structured logging (slog/zap). *(S-L2)*
 - [ ] Batasi total jumlah task tersimpan (cap in-memory storage capacity). *(S-C2)*
+- [ ] *Learning Item:* Pelajari cara menyimpan dan membaca payload claims autentikasi (seperti userID) dari context framework (`c.Set()` dan `c.Get()`).
 
 > Catatan: semua temuan bersifat rekomendasi. Tidak ada file sumber yang dimodifikasi selama review ini.
