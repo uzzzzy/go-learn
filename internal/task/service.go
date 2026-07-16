@@ -1,5 +1,9 @@
 package task
 
+type TaskService struct {
+	repo Repository
+}
+
 func NewTaskService(r Repository) *TaskService {
 	return &TaskService{repo: r}
 }
@@ -20,4 +24,3 @@ func (s *TaskService) GetById(id int) (Task, error) {
 func (s *TaskService) CreateTask(input CreateTaskRequest) Task {
 	return s.repo.Create(input)
 }
-
