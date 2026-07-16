@@ -39,7 +39,7 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 *Fokus pada penulisan kode Go yang idiomatik dan penggunaan tooling standar.*
 - [x] Pecah `model.go` → `model.go` (entity) / `dto.go` / `interfaces.go` (sebagian). *(A-M3)*
 - [x] Format kode yang tidak rapi (`model.go` & `service.go`) menggunakan `gofmt`. *(Q-H1)*
-- [ ] `go mod tidy` — buang dependency tak terpakai (`mongo-driver/v2`). *(A-L1)*
+- [x] `go mod tidy` — `mongo-driver/v2` tetap ada karena di-import secara indirect oleh `gin`. *(A-L1)*
 - [ ] Format kode (`gofmt -w .`) dan jalankan linter (`golangci-lint`) secara menyeluruh. *(Q-tooling)*
 - [ ] Hilangkan stutter penamaan: `TaskRepository`→`Repository`, `NewTaskRepository`→`NewRepository` pada package `task`. *(Q-M1)*
 - [ ] Ubah nama `RegisterRouters` → `RegisterRoutes` di `router.go`. *(Q-L2)*

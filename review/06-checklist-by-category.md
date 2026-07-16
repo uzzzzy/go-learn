@@ -14,7 +14,7 @@ Progress total: `7 / 41`
 - [ ] Putuskan scope CRUD & rekonsiliasi 3-arah (Repository punya Update/Delete; Service & router tidak): *(A-M1)*
   - [ ] (a) Lengkapi: `Service` interface + `TaskService` + handler + route `PUT`/`PATCH`/`DELETE`, **atau**
   - [ ] (b) Hapus `UpdateById`/`DeleteById` sampai dibutuhkan. `internal/task/{model,repository,router}.go`
-- [ ] `go mod tidy` — buang `mongo-driver/v2` (biarkan `quic-go`). `go.mod`. *(A-L1)*
+- [x] `go mod tidy` — `mongo-driver/v2` tidak bisa dibuang karena di-import secara `indirect` oleh `gin`. *(A-L1)*
 
 **P2**
 - [ ] Konsolidasi composition root: bangun repo→service→handler di satu tempat; `RegisterRouters` hanya map route. `main.go:17-18`, `internal/task/router.go:5-8`. *(A-M2)*
