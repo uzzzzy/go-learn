@@ -69,6 +69,7 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Tambahkan unit test untuk `/health`. *(T-Medium)*
 - [ ] *Practical Task:* Buat struct fake/mock untuk `Repository` secara manual (tanpa library generator) untuk mensimulasikan database error saat testing.
 - [ ] *Practical Task:* Jalankan `go test -coverprofile=coverage.out` dan buat script otomatis untuk membuka HTML coverage via browser dengan `go tool cover -html`.
+- [ ] *Practical Task:* Buat Integration Test menggunakan HTTP Client eksternal (`net/http` client bawaan Go) untuk menguji seluruh alur API secara End-to-End (E2E).
 
 ### Milestone 4 — Struktur Data & Konkurensi Go (Lanjutan)
 *Fokus pada safety dan optimasi konkurensi di Go.*
@@ -80,6 +81,7 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Buat concurrent `-race` test dengan goroutine konkuren, lalu jalankan `go test -race ./...`. *(T-Low / C)*
 - [ ] *Practical Task:* Tulis fungsi benchmark (`BenchmarkRepository`) untuk membandingkan performa baca-tulis repositori berbasis slice vs map.
 - [ ] *Practical Task:* Gunakan `sync.Once` untuk memastikan inisialisasi state awal database in-memory hanya terjadi sekali saat dipanggil dari goroutine konkuren.
+- [ ] *Practical Task:* Integrasikan Redis client (`go-redis`) untuk melakukan caching data task atau sebagai alternatif in-memory database.
 
 ### Milestone 5 — Arsitektur & Hardening Sistem (Kesiapan Produksi)
 *Fokus pada penyusunan dependency injection, life-cycle server, dan manajemen request.*
@@ -92,6 +94,8 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Tambahkan rate limiting middleware pada server API. *(S-H3)*
 - [ ] *Practical Task:* Implementasikan middleware CORS kustom secara manual (mengatur header `Access-Control-Allow-Origin`, `Methods`, dan `Headers` pada response) tanpa library eksternal.
 - [ ] *Practical Task:* Buat shell script sederhana (`smoke-test.sh`) untuk otomatis menguji fungsionalitas API utama (POST, GET, PUT, DELETE) menggunakan `curl` pasca server berjalan.
+- [ ] *Practical Task:* Refactor arsitektur saat ini ke Clean Architecture penuh (pemisahan domain entity, usecase/service, dan controller/handler secara ketat).
+- [ ] *Practical Task:* Integrasikan database SQL nyata (PostgreSQL/SQLite) menggunakan `database/sql` bawaan Go atau `pgx/sqlx`.
 
 ### Milestone 6 — Keamanan API & Produksi Lanjutan
 *Fokus pada pengerasan keamanan sistem web.*
