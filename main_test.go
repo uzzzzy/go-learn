@@ -55,7 +55,7 @@ func TestTaskWorkflow(t *testing.T) {
 		assert.Nil(t, err)
 		assert.NotEmpty(t, resp.Data)
 
-		assert.Equal(t, 1, len(resp.Data))
+		assert.Equal(t, 1, len(*resp.Data))
 	})
 
 	t.Run("Get By Id", func(t *testing.T) {

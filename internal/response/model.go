@@ -9,6 +9,6 @@ const (
 
 type ApiResponse[T any] struct {
 	Status ApiStatus `json:"status"`
-	Data   T         `json:"data,omitempty"`
+	Data   *T        `json:"data,omitempty"`
 	Error  string    `json:"error,omitempty"`
 }

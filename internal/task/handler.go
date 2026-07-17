@@ -28,7 +28,7 @@ func (h *TaskHandler) GetTasks(c *gin.Context) {
 
 	c.JSON(http.StatusOK, response.ApiResponse[[]Task]{
 		Status: response.StatusSuccess,
-		Data:   tasks,
+		Data:   &tasks,
 	})
 }
 
@@ -55,7 +55,7 @@ func (h *TaskHandler) CreateTask(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, response.ApiResponse[Task]{
 		Status: response.StatusSuccess,
-		Data:   task,
+		Data:   &task,
 	})
 }
 
@@ -90,6 +90,6 @@ func (h *TaskHandler) GetTask(c *gin.Context) {
 
 	c.JSON(http.StatusOK, response.ApiResponse[Task]{
 		Status: response.StatusSuccess,
-		Data:   task,
+		Data:   &task,
 	})
 }

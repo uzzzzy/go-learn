@@ -43,7 +43,7 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [x] Format kode (`gofmt -w .`) dan jalankan linter (`golangci-lint`) secara menyeluruh. *(Q-tooling)*
 - [i] Hilangkan stutter penamaan: `TaskRepository`→`Repository`, `NewTaskRepository`→`NewRepository` pada package `task`. *(Q-M1)*
 - [x] Ubah nama `RegisterRouters` → `RegisterRoutes` di `router.go`. *(Q-L2)*
-- [ ] Perbaiki tag `omitempty` pada generic `Data T` (pakai `*T` atau hapus tag). *(Q-M3)*
+- [x] Perbaiki tag `omitempty` pada generic `Data T` (pakai `*T` atau hapus tag). *(Q-M3)*
 - [x] Batasi bind server ke `127.0.0.1` (hanya lokal) saat development, bukan `0.0.0.0`. *(S-H4)*
 - [ ] *Practical Task:* Implementasikan interface `fmt.Stringer` pada struct `Task` untuk menghasilkan output log yang informatif secara otomatis saat mencetak objek task.
 - [ ] *Practical Task:* Buat target kustom di `Makefile` atau shell script (`lint.sh`) untuk menjalankan `gofmt` dan `golangci-lint` secara berurutan.

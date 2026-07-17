@@ -4,7 +4,7 @@ Diurutkan **prioritas** (P0 Blocker → P1 Penting → P2 Kualitas → P3 Skala/
 
 Catatan: beberapa item lintas-kategori (mis. data race) muncul di satu kategori "rumah" utamanya agar tidak dobel. Kode temuan sumber dicantumkan di tiap item.
 
-Progress total: `7 / 41`
+Progress total: `8 / 41`
 
 ---
 
@@ -74,7 +74,7 @@ Progress total: `7 / 41`
 
 **P2**
 - [ ] Hilangkan stutter penamaan: `TaskRepository`→`Repository`, dst; `NewTaskX`→`NewX`. `internal/task/*`, `main.go:17-18`. *(Q-M1)*
-- [ ] Perbaiki `omitempty` pada generic `Data T` (pakai `*T` atau drop tag). `internal/response/model.go:12`. *(Q-M3)*
+- [x] Perbaiki `omitempty` pada generic `Data T` (pakai `*T` atau drop tag). `internal/response/model.go:12`. *(Q-M3)*
 - [ ] Tambah helper response (`OK/Success/Fail`), hapus duplikasi envelope (5×). `internal/task/handler.go`. *(Q-L3)*
 - [ ] Health handler pakai konstanta `StatusSuccess`, bukan `"ok"`. `main.go:31-37`. *(Q-L3)*
 - [ ] Tambah doc comment ke semua identifier exported. *(Q-L1)*
