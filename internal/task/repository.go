@@ -2,6 +2,7 @@ package task
 
 import (
 	"errors"
+	"fmt"
 	"sync"
 )
 
@@ -30,6 +31,8 @@ func (r *TaskRepository) Create(payload CreateTaskRequest) Task {
 		Completed: false,
 	}
 
+	fmt.Println(newTask.LogWithAction("CREATE"))
+
 	r.tasks = append(r.tasks, newTask)
 	r.nextID++
 
@@ -52,6 +55,7 @@ func (r *TaskRepository) GetById(id int) (Task, error) {
 
 	for _, task := range r.tasks {
 		if task.Id == id {
+			fmt.Println(task.LogWithAction("GET"))
 			return task, nil
 		}
 	}
@@ -68,6 +72,8 @@ func (r *TaskRepository) UpdateById(id int, payload UpdateTaskRequest) (Task, er
 			r.tasks[i].Title = payload.Title
 			r.tasks[i].Completed = payload.Completed
 
+			fmt.Println(r.tasks[i].LogWithAction("UPDATE"))
+
 			return r.tasks[i], nil
 		}
 	}
@@ -83,6 +89,8 @@ func (r *TaskRepository) DeleteById(id int) (Task, error) {
 		if task.Id == id {
 			deletedTask := task
 			r.tasks = append(r.tasks[:i], r.tasks[i+1:]...)
+
+			fmt.Println(task.LogWithAction("DELETE"))
 
 			return deletedTask, nil
 		}
