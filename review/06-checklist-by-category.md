@@ -4,7 +4,7 @@ Diurutkan **prioritas** (P0 Blocker → P1 Penting → P2 Kualitas → P3 Skala/
 
 Catatan: beberapa item lintas-kategori (mis. data race) muncul di satu kategori "rumah" utamanya agar tidak dobel. Kode temuan sumber dicantumkan di tiap item.
 
-Progress total: `8 / 41`
+Progress total: `12 / 45`
 
 ---
 
@@ -35,7 +35,7 @@ Progress total: `8 / 41`
 - [x] Batasi ukuran request body dengan `http.MaxBytesReader` di route tulis. `internal/middleware/request.go`, dipasang di `POST /tasks` (`internal/task/router.go:17`); handler balas `413` via `isBodyTooLarge` (`internal/task/handler.go:39`). *(S-C2)*
 - [x] Tambah `max=` pada `Title` (`binding:"required,max=256"`). `internal/task/model.go:32-39`. *(S-C2)*
 - [x] Ganti `router.Run()` dengan `http.Server` bertimeout (anti-Slowloris). `main.go:28`. *(S-H1)*
-- [ ] Bind ke `127.0.0.1` (configurable), bukan `0.0.0.0`. `main.go:28`. *(S-H4)*
+- [x] Bind ke `127.0.0.1` (configurable), bukan `0.0.0.0`. `main.go:28`. *(S-H4)*
 - [ ] Berhenti kembalikan `err.Error()` mentah ke klien; log di server, balas generik. `internal/task/handler.go:25-31, 62-68`. *(S-M1)*
 
 **P1**
@@ -78,11 +78,11 @@ Progress total: `8 / 41`
 - [ ] Tambah helper response (`OK/Success/Fail`), hapus duplikasi envelope (5×). `internal/task/handler.go`. *(Q-L3)*
 - [ ] Health handler pakai konstanta `StatusSuccess`, bukan `"ok"`. `main.go:31-37`. *(Q-L3)*
 - [ ] Tambah doc comment ke semua identifier exported. *(Q-L1)*
-- [ ] Rename `RegisterRouters` → `RegisterRoutes`. `internal/task/router.go:5`. *(Q-L2)*
+- [x] Rename `RegisterRouters` → `RegisterRoutes`. `internal/task/router.go:5`. *(Q-L2)*
 - [ ] Adopsi `golangci-lint` + gate CI. *(Q-tooling)*
 
 **P3**
-- [ ] Tangani error dari start server (jangan buang return `Run()`/`ListenAndServe()`). `main.go:28`. *(Q-M4)*
+- [x] Tangani error dari start server (jangan buang return `Run()`/`ListenAndServe()`). `main.go:28`. *(Q-M4)*
   > *(overlap dengan P0 Security H1 — kerjakan sekaligus saat migrasi ke `http.Server`)*
 
 ---
