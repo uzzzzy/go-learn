@@ -4,15 +4,15 @@ Diurutkan **prioritas** (P0 Blocker → P1 Penting → P2 Kualitas → P3 Skala/
 
 Catatan: beberapa item lintas-kategori (mis. data race) muncul di satu kategori "rumah" utamanya agar tidak dobel. Kode temuan sumber dicantumkan di tiap item.
 
-Progress total: `12 / 45`
+Progress total: `14 / 45`
 
 ---
 
 ## 🏛️ Arsitektur & Desain
 
 **P1**
-- [ ] Putuskan scope CRUD & rekonsiliasi 3-arah (Repository punya Update/Delete; Service & router tidak): *(A-M1)*
-  - [ ] (a) Lengkapi: `Service` interface + `TaskService` + handler + route `PUT`/`PATCH`/`DELETE`, **atau**
+- [x] Putuskan scope CRUD & rekonsiliasi 3-arah (Repository punya Update/Delete; Service & router tidak): *(A-M1)*
+  - [x] (a) Lengkapi: `Service` interface + `TaskService` + handler + route `PUT`/`PATCH`/`DELETE`, **atau**
   - [ ] (b) Hapus `UpdateById`/`DeleteById` sampai dibutuhkan. `internal/task/{model,repository,router}.go`
 - [x] `go mod tidy` — `mongo-driver/v2` tidak bisa dibuang karena di-import secara `indirect` oleh `gin`. *(A-L1)*
 
@@ -93,7 +93,7 @@ Progress total: `12 / 45`
 - [ ] Unit test repository (table-driven): `Create`, `GetById` hit/miss, `UpdateById`/`DeleteById` sukses+not-found. `internal/task/repository_test.go`. *(T-Critical)*
 - [ ] Unit test service dengan fake `Repository` (propagasi error). `internal/task/service_test.go`. *(T-High)*
 - [ ] HTTP error-path test: 400 invalid JSON / missing title / non-numeric id, 404 not-found; router segar per subtest. *(T-High)*
-- [ ] Concurrent `-race` test (mis. 50 goroutine POST) + `go test -race ./...` di CI. *(T-Low / C)*
+- [x] Concurrent `-race` test (mis. 50 goroutine POST) + `go test -race ./...` di CI (pengujian lokal berhasil). *(T-Low / C)*
 
 **P2**
 - [ ] Rapikan `main_test.go`: hapus `_ = createdTaskID`; subtest jangan order-dependent. `main_test.go:80, 17-81`. *(T-Medium, Q-L5/L6)*

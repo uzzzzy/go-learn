@@ -93,3 +93,89 @@ func (h *TaskHandler) GetTask(c *gin.Context) {
 		Data:   &task,
 	})
 }
+
+func (h *TaskHandler) UpdateTask(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, response.ApiResponse[any]{
+			Status: response.StatusFailed,
+			Error:  "Invalid ID",
+		})
+		return
+	}
+
+	var input UpdateTaskRequest
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+		if isBodyTooLarge(err) {
+			c.JSON(http.StatusRequestEntityTooLarge, response.ApiResponse[any]{
+				Status: response.StatusFailed,
+				Error:  err.Error(),
+			})
+			return
+		}
+		c.JSON(http.StatusBadRequest, response.ApiResponse[any]{
+			Status: response.StatusFailed,
+			Error:  err.Error(),
+		})
+		return
+	}
+
+	task, err := h.service.UpdateTaskById(id, input)
+
+	if errors.Is(err, ErrTaskNotFound) {
+		c.JSON(http.StatusNotFound, response.ApiResponse[any]{
+			Status: response.StatusFailed,
+			Error:  err.Error(),
+		})
+		return
+	}
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, response.ApiResponse[any]{
+			Status: response.StatusFailed,
+			Error:  err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, response.ApiResponse[Task]{
+		Status: response.StatusSuccess,
+		Data:   &task,
+	})
+}
+
+func (h *TaskHandler) DeleteTask(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, response.ApiResponse[any]{
+			Status: response.StatusFailed,
+			Error:  "Invalid ID",
+		})
+		return
+	}
+
+	task, err := h.service.DeleteById(id)
+
+	if errors.Is(err, ErrTaskNotFound) {
+		c.JSON(http.StatusNotFound, response.ApiResponse[any]{
+			Status: response.StatusFailed,
+			Error:  err.Error(),
+		})
+		return
+	}
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, response.ApiResponse[any]{
+			Status: response.StatusFailed,
+			Error:  err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, response.ApiResponse[Task]{
+		Status: response.StatusSuccess,
+		Data:   &task,
+	})
+}

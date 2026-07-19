@@ -24,3 +24,11 @@ func (s *TaskService) GetById(id int) (Task, error) {
 func (s *TaskService) CreateTask(input CreateTaskRequest) Task {
 	return s.repo.Create(input)
 }
+
+func (s *TaskService) UpdateTaskById(id int, input UpdateTaskRequest) (Task, error) {
+	return s.repo.UpdateById(id, input)
+}
+
+func (s *TaskService) DeleteById(id int) (Task, error) {
+	return s.repo.DeleteById(id)
+}

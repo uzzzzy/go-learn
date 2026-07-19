@@ -52,7 +52,7 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 *Fokus pada penanganan request HTTP, error handling, dan response formatting.*
 - [x] Batasi ukuran request body dengan `http.MaxBytesReader` di route tulis. *(S-C2)*
 - [x] Tambah `max=` pada `Title` (`binding:"required,max=256"`). *(S-C2)*
-- [ ] Putuskan scope CRUD: Lengkapi route/handler `PUT`/`PATCH`/`DELETE` (lengkapi `Service` interface, impl repo, handler, router). *(A-M1)*
+- [x] Putuskan scope CRUD: Lengkapi route/handler `PUT`/`PATCH`/`DELETE` (lengkapi `Service` interface, impl repo, handler, router). *(A-M1)*
 - [ ] Berhenti kembalikan `err.Error()` mentah ke klien; log di server dan balas error generik. *(S-M1)*
 - [ ] Tambah helper response (`OK`/`Success`/`Fail`) untuk merapikan handler & hapus duplikasi envelope. *(Q-L3)*
 - [ ] Tolak `id < 1` secara eksplisit di `GetTask` dan pastikan header `Content-Type: application/json`. *(S-L1, S-L3)*
@@ -78,7 +78,7 @@ Berikut adalah urutan pengerjaan yang dirancang secara bertahap dari pemahaman d
 - [ ] Gunakan `slices.Delete` di `DeleteById` di bawah perlindungan write-lock. *(C-H2)*
 - [ ] Ubah penyimpanan repository dari slice `[]Task` menjadi `map[int]Task` untuk lookup O(1). *(C-recommended)*
 - [ ] Sederhanakan service layer jika method hanya berupa pass-through murni. *(C-L1)*
-- [ ] Buat concurrent `-race` test dengan goroutine konkuren, lalu jalankan `go test -race ./...`. *(T-Low / C)*
+- [x] Buat concurrent `-race` test dengan goroutine konkuren, lalu jalankan `go test -race ./...`. *(T-Low / C)*
 - [ ] *Practical Task:* Tulis fungsi benchmark (`BenchmarkRepository`) untuk membandingkan performa baca-tulis repositori berbasis slice vs map.
 - [ ] *Practical Task:* Gunakan `sync.Once` untuk memastikan inisialisasi state awal database in-memory hanya terjadi sekali saat dipanggil dari goroutine konkuren.
 - [ ] *Practical Task:* Integrasikan Redis client (`go-redis`) untuk melakukan caching data task atau sebagai alternatif in-memory database.

@@ -14,6 +14,8 @@ type Service interface {
 	GetAllTasks() []Task
 	GetById(id int) (Task, error)
 	CreateTask(input CreateTaskRequest) Task
+	UpdateTaskById(id int, input UpdateTaskRequest) (Task, error)
+	DeleteById(id int) (Task, error)
 }
 
 type Task struct {
